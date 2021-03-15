@@ -15,6 +15,9 @@
   <p> Escrito por: {{ detalle_post.autor }}</p>
 {% endblock titulo_principal%}
 
+{% block busqueda %}
+{% endblock busqueda%}
+
 {% block contenido%}
   {{ detalle_post.contenido | safe }}
 {% endblock contenido%}

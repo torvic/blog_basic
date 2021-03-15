@@ -1,10 +1,17 @@
 from django.shortcuts import render
 from .models import post,categoria
 from django.shortcuts import get_object_or_404
+from django.db.models import Q
 
 # Create your views here.
 def home(request):
+    queryset = request.GET.get('buscar')
     Post = post.objects.filter(estado=True)
+    if queryset:
+        Post = post.objects.filter(
+            Q(titulo__icontains = queryset) |
+            Q(descripcion__icontains = queryset) 
+        ).distinct()
     return render(request,'blog/index.html',context={'post':Post})
 
 def detallePost(request,slug):
